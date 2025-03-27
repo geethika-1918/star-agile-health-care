@@ -37,7 +37,7 @@ pipeline {
         }
         stage('Provision Test Infrastructure') {
             steps {
-                sh 'cd terraform && terraform init && terraform apply -auto-approve'
+                sh 'cd terraform && terraform init && terraform apply -auto-approve authenticator.tf && terraform apply -auto-approve'
             }
         }
         
