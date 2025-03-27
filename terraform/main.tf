@@ -2,13 +2,25 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "5.92.0"  # Specify the exact version mentioned in the error
+      version = "5.92.0"
     }
   }
 }
 
 provider "aws" {
-  region = "ap-south-1"
+  region     = "ap-south-1"
+  access_key = var.aws_access_key
+  secret_key = var.aws_secret_key
+}
+
+variable "aws_access_key" {
+  description = "AWS Access Key"
+  type        = string
+}
+
+variable "aws_secret_key" {
+  description = "AWS Secret Key"
+  type        = string
 }
 
 resource "aws_instance" "kubernetes_master" {
