@@ -1,6 +1,6 @@
 resource "aws_instance" "kubernetes_master" {
   ami           = "ami-0e35ddab05955cf57"
-  instance_type = "t2.medium"
+  instance_type = "t3.medium"
   key_name      = "ubuntu-machine"
   
   tags = {
@@ -11,7 +11,7 @@ resource "aws_instance" "kubernetes_master" {
 resource "aws_instance" "kubernetes_worker" {
   count         = 2
   ami           = "ami-0e35ddab05955cf57"
-  instance_type = "t2.medium"
+  instance_type = "t3.medium"
   key_name      = "ubuntu-machine"
   
   tags = {
