@@ -60,7 +60,7 @@ pipeline {
                 sh '''
                     cd terraform
                     terraform init
-                    AWS_PROFILE=default terraform apply -auto-approve
+                    terraform apply -auto-approve
                 '''
             }
         }
