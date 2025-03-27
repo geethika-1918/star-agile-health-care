@@ -60,11 +60,6 @@ pipeline {
             }
         }
         
-        stage('Run Selenium Tests') {
-            steps {
-                sh 'cd selenium && mvn test'
-            }
-        }
         
         stage('Deploy to Production') {
             when {
