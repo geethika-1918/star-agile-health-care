@@ -35,6 +35,11 @@ pipeline {
                 sh 'mvn package'
             }
         }
+        stage('Provision Test Infrastructure') {
+            steps {
+                sh 'cd terraform && terraform init && terraform apply -auto-approve'
+            }
+        }
         
         stage('Configure Servers') {
             steps {
@@ -45,12 +50,6 @@ pipeline {
         stage('Docker Build') {
             steps {
                 sh 'docker build -t medicure:${BUILD_NUMBER} .'
-            }
-        }
-        
-        stage('Provision Test Infrastructure') {
-            steps {
-                sh 'cd terraform && terraform init && terraform apply -auto-approve'
             }
         }
         
