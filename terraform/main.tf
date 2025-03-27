@@ -24,7 +24,7 @@ variable "aws_secret_key" {
 }
 
 resource "aws_instance" "kubernetes_master" {
-  ami           = "ami-0e35ddab05955cf57"
+  ami           = "ami-0e35ddab05955cf57" # Ensure the AMI ID is available in your region
   instance_type = "t3.medium"
   key_name      = "ubuntu-machine"
   
@@ -35,7 +35,7 @@ resource "aws_instance" "kubernetes_master" {
 
 resource "aws_instance" "kubernetes_worker" {
   count         = 2
-  ami           = "ami-0e35ddab05955cf57"
+  ami           = "ami-0e35ddab05955cf57" # Use an appropriate AMI for your region
   instance_type = "t3.medium"
   key_name      = "ubuntu-machine"
   
@@ -45,9 +45,11 @@ resource "aws_instance" "kubernetes_worker" {
 }
 
 output "master_ip" {
-  value = aws_instance.kubernetes_master.public_ip
+  description = "Public IP address of the Kubernetes Master instance"
+  value       = aws_instance.kubernetes_master.public_ip
 }
 
 output "worker_ips" {
-  value = aws_instance.kubernetes_worker[*].public_ip
+  description = "Public IP addresses of the Kubernetes Worker instances"
+  value       = aws_instance.kubernetes_worker[*].public_ip
 }
