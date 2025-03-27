@@ -1,7 +1,7 @@
 provider "aws" {
-  region                   = "ap-south-1"
-  shared_credentials_file = "/root/.aws/credentials"
-  profile                 = "default"
+  region                    = "ap-south-1"
+  shared_credentials_files = ["/root/.aws/credentials"]
+  profile                  = "default"
 }
 resource "aws_instance" "kubernetes_master" {
   ami           = "ami-0e35ddab05955cf57"
