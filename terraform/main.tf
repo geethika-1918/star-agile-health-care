@@ -1,6 +1,5 @@
 provider "aws" {
   region = "ap-south-1"
-  profile = "default"
 }
 resource "aws_instance" "kubernetes_master" {
   ami           = "ami-0e35ddab05955cf57"
