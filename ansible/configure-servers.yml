@@ -1,0 +1,74 @@
+---
+- name: Configure Kubernetes Cluster
+  hosts: all
+  become: yes
+  tasks:
+    - name: Install Docker
+      apt:
+        name: docker.io
+        state: present
+        update_cache: yes
+
+    - name: Start Docker service
+      service:
+        name: docker
+        state: started
+        enabled: yes
+
+    - name: Add Kubernetes apt-key
+      apt_key:
+        url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+        state: present
+
+    - name: Add Kubernetes APT repository
+      apt_repository:
+        repo: deb http://apt.kubernetes.io/ kubernetes-xenial main
+        state: present
+        filename: kubernetes
+
+    - name: Install Kubernetes components
+      apt:
+        name: "{{ item }}"
+        state: present
+        update_cache: yes
+      with_items:
+        - kubelet
+        - kubeadm
+        - kubectl
+
+- name: Configure Kubernetes Master
+  hosts: master
+  become: yes
+  tasks:
+    - name: Initialize Kubernetes cluster
+      command: kubeadm init --pod-network-cidr=10.244.0.0/16
+      args:
+        creates: /etc/kubernetes/admin.conf
+
+    - name: Set up kubectl for the ubuntu user
+      shell: |
+        mkdir -p /home/ubuntu/.kube
+        cp -i /etc/kubernetes/admin.conf /home/ubuntu/.kube/config
+        chown ubuntu:ubuntu /home/ubuntu/.kube/config
+      args:
+        creates: /home/ubuntu/.kube/config
+
+    - name: Install Flannel network plugin
+      become: no
+      command: kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+      args:
+        creates: /home/ubuntu/.kube/flannel-deployed
+
+- name: Join Workers to Cluster
+  hosts: workers
+  become: yes
+  tasks:
+    - name: Get join command
+      shell: kubeadm token create --print-join-command
+      register: join_command
+      delegate_to: "{{ groups['master'][0] }}"
+
+    - name: Join the cluster
+      command: "{{ join_command.stdout }}"
+      args:
+        creates: /etc/kubernetes/kubelet.conf
