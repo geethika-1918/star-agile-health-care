@@ -36,6 +36,12 @@ pipeline {
             }
         }
         
+        stage('Configure Servers') {
+            steps {
+                sh 'cd ansible && ansible-playbook configure-servers.yml'
+            }
+        }
+        
         stage('Docker Build') {
             steps {
                 sh 'docker build -t medicure:${BUILD_NUMBER} .'
@@ -48,11 +54,6 @@ pipeline {
             }
         }
         
-        stage('Configure Servers') {
-            steps {
-                sh 'cd ansible && ansible-playbook configure-servers.yml'
-            }
-        }
         
         stage('Deploy to Test') {
             steps {
