@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        AWS_REGION = "ap-south-1" // Change to your AWS region
+        AWS_REGION = "ap-south-1" // Set your AWS region here
     }
 
     tools {
@@ -10,7 +10,7 @@ pipeline {
         jdk 'openjdk 17.0.14'
     }
 
-
+    stages {
         stage('Checkout') {
             steps {
                 checkout scm
