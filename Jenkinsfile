@@ -61,6 +61,8 @@ pipeline {
                     cd terraform
                     terraform init
                     terraform apply -auto-approve
+                    terraform output ansible_inventory
+                    terraform output ansible_inventory > inventory.ini
                 '''
             }
         }
@@ -69,7 +71,7 @@ pipeline {
             steps {
                 sh '''
                     cd ansible
-                    ansible-playbook configure-servers.yml
+                    ansible-playbook -i inventory.ini configure-servers.yml
                 '''
             }
         }
