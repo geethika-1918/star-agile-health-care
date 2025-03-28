@@ -43,10 +43,11 @@ output "worker_private_ips" {
   value       = aws_instance.kubernetes_worker[*].private_ip
 }
 
-# Output Inventory File for Ansible
 output "ansible_inventory" {
   value = templatefile("inventory.tpl", {
     master_ip  = aws_instance.kubernetes_master.private_ip,
-    worker_ips = aws_instance.kubernetes_worker[*].private_ip
+    worker_ips = aws_instance.kubernetes_worker[*].private_ip,
+    worker_count = 2 // Pass the count of worker instances
   })
+}
 }
