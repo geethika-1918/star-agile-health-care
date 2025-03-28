@@ -32,22 +32,24 @@ resource "aws_instance" "kubernetes_worker" {
   }
 }
 
-# Outputs for private IPs
+# Output for the private IP of the master node
 output "master_private_ip" {
   description = "Private IP address of the Kubernetes Master instance"
   value       = aws_instance.kubernetes_master.private_ip
 }
 
+# Output for the private IPs of the worker nodes
 output "worker_private_ips" {
   description = "Private IP addresses of the Kubernetes Worker instances"
   value       = aws_instance.kubernetes_worker[*].private_ip
 }
 
+# Output for Ansible inventory
 output "ansible_inventory" {
   value = templatefile("inventory.tpl", {
-    master_ip  = aws_instance.kubernetes_master.private_ip,
-    worker_ips = aws_instance.kubernetes_worker[*].private_ip,
-    worker_count = 2 // Pass the count of worker instances
+    master_ip    = aws_instance.kubernetes_master.private_ip,
+    worker_ips   = aws_instance.kubernetes_worker[*].private_ip,
+    worker_count = length(aws_instance.kubernetes_worker) // Dynamic count of worker instances
   })
 }
-}
+
