@@ -32,12 +32,21 @@ resource "aws_instance" "kubernetes_worker" {
   }
 }
 
-output "master_ip" {
-  description = "Public IP address of the Kubernetes Master instance"
-  value       = aws_instance.kubernetes_master.public_ip
+# Outputs for private IPs
+output "master_private_ip" {
+  description = "Private IP address of the Kubernetes Master instance"
+  value       = aws_instance.kubernetes_master.private_ip
 }
 
-output "worker_ips" {
-  description = "Public IP addresses of the Kubernetes Worker instances"
-  value       = aws_instance.kubernetes_worker[*].public_ip
+output "worker_private_ips" {
+  description = "Private IP addresses of the Kubernetes Worker instances"
+  value       = aws_instance.kubernetes_worker[*].private_ip
+}
+
+# Output Inventory File for Ansible
+output "ansible_inventory" {
+  value = templatefile("inventory.tpl", {
+    master_ip  = aws_instance.kubernetes_master.private_ip,
+    worker_ips = aws_instance.kubernetes_worker[*].private_ip
+  })
 }
