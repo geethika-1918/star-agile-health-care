@@ -9,7 +9,8 @@ pipeline {
             steps {
 
                 echo "checked out"
-           sleep(time: 974, unit: 'MILLISECONDS')
+
+                sleep(time: 748, unit: 'MILLISECONDS') // Pauses for 15 seconds
 
             }
 
@@ -20,7 +21,8 @@ pipeline {
             steps {
 
                 echo "code compiled"
-sleep(time: 63, unit: 'MILLISECONDS')
+
+                sleep(time: 4790, unit: 'MILLISECONDS') // Pauses for 15 seconds
 
             }
 
@@ -31,7 +33,8 @@ sleep(time: 63, unit: 'MILLISECONDS')
             steps {
 
                 echo "maven test"
-sleep(time: 142, unit: 'MILLISECONDS')
+
+                sleep(time: 14800, unit: 'MILLISECONDS') // Pauses for 15 seconds
 
             }
 
@@ -42,7 +45,9 @@ sleep(time: 142, unit: 'MILLISECONDS')
             steps {
 
                 echo "packaging your code"
-sleep(time: 127, unit: 'MILLISECONDS')
+
+                sleep(time: 1470, unit: 'MILLISECONDS') // Pauses for 15 seconds
+
             }
 
         }
@@ -52,7 +57,8 @@ sleep(time: 127, unit: 'MILLISECONDS')
             steps {
 
                 echo "provisioning test infrastructure"
-sleep(time: 163, unit: 'MILLISECONDS')
+
+                sleep(time: 25370, unit: 'MILLISECONDS') // Pauses for 15 seconds
 
             }
 
@@ -63,7 +69,8 @@ sleep(time: 163, unit: 'MILLISECONDS')
             steps {
 
                 echo "configuring servers"
-sleep(time: 149, unit: 'MILLISECONDS')
+
+                sleep(time: 1470, unit: 'MILLISECONDS') // Pauses for 15 seconds
 
             }
 
@@ -74,7 +81,8 @@ sleep(time: 149, unit: 'MILLISECONDS')
             steps {
 
                 echo "built the docker image"
-sleep(time: 58, unit: 'MILLISECONDS')
+
+                sleep(time: 15470, unit: 'MILLISECONDS') // Pauses for 15 seconds
 
             }
 
@@ -85,7 +93,8 @@ sleep(time: 58, unit: 'MILLISECONDS')
             steps {
 
                 echo "deployed the test phase"
-sleep(time: 128, unit: 'MILLISECONDS')
+
+                sleep(time: 13960, unit: 'MILLISECONDS') // Pauses for 15 seconds
 
             }
 
@@ -93,10 +102,11 @@ sleep(time: 128, unit: 'MILLISECONDS')
  
         stage('Deploy to Production') {
 
-            steps { // Added the "steps" block here
+            steps {
 
                 echo "deployed the production phase"
-sleep(time: 187, unit: 'MILLISECONDS')
+
+                sleep(time: 15600, unit: 'MILLISECONDS') // Pauses for 15 seconds
 
             }
 
@@ -107,7 +117,8 @@ sleep(time: 187, unit: 'MILLISECONDS')
             steps {
 
                 echo "monitoring"
-sleep(time: 83, unit: 'MILLISECONDS')
+
+                sleep(time: 20400, unit: 'MILLISECONDS') // Pauses for 15 seconds
 
             }
 
