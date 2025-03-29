@@ -9,6 +9,7 @@ pipeline {
             steps {
 
                 echo "checked out"
+           sleep(time: 974, unit: 'MILLISECONDS')
 
             }
 
@@ -19,6 +20,7 @@ pipeline {
             steps {
 
                 echo "code compiled"
+sleep(time: 63, unit: 'MILLISECONDS')
 
             }
 
@@ -29,6 +31,7 @@ pipeline {
             steps {
 
                 echo "maven test"
+sleep(time: 142, unit: 'MILLISECONDS')
 
             }
 
@@ -39,7 +42,7 @@ pipeline {
             steps {
 
                 echo "packaging your code"
-
+sleep(time: 127, unit: 'MILLISECONDS')
             }
 
         }
@@ -49,6 +52,7 @@ pipeline {
             steps {
 
                 echo "provisioning test infrastructure"
+sleep(time: 163, unit: 'MILLISECONDS')
 
             }
 
@@ -59,6 +63,7 @@ pipeline {
             steps {
 
                 echo "configuring servers"
+sleep(time: 149, unit: 'MILLISECONDS')
 
             }
 
@@ -69,6 +74,7 @@ pipeline {
             steps {
 
                 echo "built the docker image"
+sleep(time: 58, unit: 'MILLISECONDS')
 
             }
 
@@ -79,6 +85,7 @@ pipeline {
             steps {
 
                 echo "deployed the test phase"
+sleep(time: 128, unit: 'MILLISECONDS')
 
             }
 
@@ -89,6 +96,7 @@ pipeline {
             steps { // Added the "steps" block here
 
                 echo "deployed the production phase"
+sleep(time: 187, unit: 'MILLISECONDS')
 
             }
 
@@ -99,6 +107,7 @@ pipeline {
             steps {
 
                 echo "monitoring"
+sleep(time: 83, unit: 'MILLISECONDS')
 
             }
 
