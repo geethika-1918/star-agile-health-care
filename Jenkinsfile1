@@ -1,0 +1,110 @@
+pipeline {
+
+    agent any
+
+    stages {
+
+        stage('Checkout') {
+
+            steps {
+
+                echo "checked out"
+
+            }
+
+        }
+ 
+        stage('Build') {
+
+            steps {
+
+                echo "code compiled"
+
+            }
+
+        }
+ 
+        stage('Test') {
+
+            steps {
+
+                echo "maven test"
+
+            }
+
+        }
+ 
+        stage('Package') {
+
+            steps {
+
+                echo "packaging your code"
+
+            }
+
+        }
+ 
+        stage('Provision Test Infrastructure') {
+
+            steps {
+
+                echo "provisioning test infrastructure"
+
+            }
+
+        }
+ 
+        stage('Configure Servers') {
+
+            steps {
+
+                echo "configuring servers"
+
+            }
+
+        }
+ 
+        stage('Docker Build') {
+
+            steps {
+
+                echo "built the docker image"
+
+            }
+
+        }
+ 
+        stage('Deploy to Test') {
+
+            steps {
+
+                echo "deployed the test phase"
+
+            }
+
+        }
+ 
+        stage('Deploy to Production') {
+
+            steps { // Added the "steps" block here
+
+                echo "deployed the production phase"
+
+            }
+
+        }
+ 
+        stage('Setup Monitoring') {
+
+            steps {
+
+                echo "monitoring"
+
+            }
+
+        }
+
+    }
+
+}
+ 
